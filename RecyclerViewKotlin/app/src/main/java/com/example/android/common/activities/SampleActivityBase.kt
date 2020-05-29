@@ -16,9 +16,7 @@
 
 package com.example.android.common.activities
 
-import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
-
 import com.example.android.common.logger.Log
 import com.example.android.common.logger.LogWrapper
 
@@ -43,6 +41,6 @@ open class SampleActivityBase : FragmentActivity() {
     }
 
     companion object {
-        val TAG = "SampleActivityBase"
+        const val TAG = "SampleActivityBase"
     }
 }

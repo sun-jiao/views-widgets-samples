@@ -30,12 +30,12 @@ class LogWrapper : LogNode {
      * Prints data out to the console using Android's native log mechanism.
      * @param priority Log level of the data being logged.  Verbose, Error, etc.
      * @param tag Tag for for the log data.  Can be used to organize log statements.
-     * @param msg The actual message to be logged. The actual message to be logged.
+     * @param msg_para The actual message to be logged. The actual message to be logged.
      * @param tr If an exception was thrown, this can be sent along for the logging facilities
      * to extract and print useful information.
      */
-    override fun println(priority: Int, tag: String?, msg: String?, tr: Throwable?) {
-        var msg = msg
+    override fun println(priority: Int, tag: String?, msg_para: String?, tr: Throwable?) {
+        var msg = msg_para
         // There actually are log methods that don't take a msg parameter.  For now,
         // if that's the case, just convert null to the empty string and move on.
         var useMsg: String? = msg

@@ -99,11 +99,11 @@ class RecyclerViewFragment : Fragment() {
         }
 
         when (layoutManagerType) {
-            RecyclerViewFragment.LayoutManagerType.GRID_LAYOUT_MANAGER -> {
+            LayoutManagerType.GRID_LAYOUT_MANAGER -> {
                 layoutManager = GridLayoutManager(activity, SPAN_COUNT)
                 currentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER
             }
-            RecyclerViewFragment.LayoutManagerType.LINEAR_LAYOUT_MANAGER -> {
+            LayoutManagerType.LINEAR_LAYOUT_MANAGER -> {
                 layoutManager = LinearLayoutManager(activity)
                 currentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER
             }
@@ -128,13 +128,13 @@ class RecyclerViewFragment : Fragment() {
      * from a local content provider or remote server.
      */
     private fun initDataset() {
-        dataSet = Array(DATASET_COUNT, { i -> "This is element # $i"})
+        dataSet = Array(DATA_SET_COUNT) { i -> "This is element # $i"}
     }
 
     companion object {
-        private val TAG = "RecyclerViewFragment"
-        private val KEY_LAYOUT_MANAGER = "layoutManager"
-        private val SPAN_COUNT = 2
-        private val DATASET_COUNT = 60
+        private const val TAG = "RecyclerViewFragment"
+        private const val KEY_LAYOUT_MANAGER = "layoutManager"
+        private const val SPAN_COUNT = 2
+        private const val DATA_SET_COUNT = 60
     }
 }

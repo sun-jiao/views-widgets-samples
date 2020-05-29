@@ -17,19 +17,14 @@ package com.example.android.common.logger
 
 import android.app.Activity
 import android.content.Context
-import android.util.*
-import android.widget.TextView
+import android.util.AttributeSet
 
 /** Simple TextView which is used to output log data received through the LogNode interface.
  */
-class LogView : TextView, LogNode {
+class LogView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) : androidx.appcompat.widget.AppCompatTextView(context, attrs, defStyle), LogNode {
 
     // The next LogNode in the chain.
     private var next: LogNode? = null
-
-    @JvmOverloads
-    constructor(context: Context, attrs: AttributeSet? = null, defStyle: Int = 0) :
-            super(context, attrs, defStyle)
 
     /**
      * Formats the log data and prints it out to the LogView.
@@ -67,10 +62,10 @@ class LogView : TextView, LogNode {
 
         // In case this was originally called from an AsyncTask or some other off-UI thread,
         // make sure the update occurs within the UI thread.
-        (context as Activity).runOnUiThread( {
+        (context as Activity).runOnUiThread {
             // Display the text we just generated within the LogView.
             appendToLog(outputBuilder.toString())
-        })
+        }
 
 
         next?.println(priority, tag, msg, tr)
@@ -88,7 +83,7 @@ class LogView : TextView, LogNode {
      */
     private fun appendIfNotNull(source: StringBuilder, addStr: String?, delimiter: String): StringBuilder {
 
-        if (addStr != null && !addStr.isEmpty()) {
+        if (addStr != null && addStr.isNotEmpty()) {
             return source.append(addStr).append(delimiter)
         }
 

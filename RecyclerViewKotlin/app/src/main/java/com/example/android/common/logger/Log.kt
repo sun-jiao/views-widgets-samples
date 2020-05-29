@@ -27,13 +27,13 @@ package com.example.android.common.logger
 object Log {
     // Grabbing the native values from Android's native logging facilities,
     // to make for easy migration and interop.
-    val NONE = -1
-    val VERBOSE = android.util.Log.VERBOSE
-    val DEBUG = android.util.Log.DEBUG
-    val INFO = android.util.Log.INFO
-    val WARN = android.util.Log.WARN
-    val ERROR = android.util.Log.ERROR
-    val ASSERT = android.util.Log.ASSERT
+    const val NONE = -1
+    private const val VERBOSE = android.util.Log.VERBOSE
+    private const val DEBUG = android.util.Log.DEBUG
+    private const val INFO = android.util.Log.INFO
+    private const val WARN = android.util.Log.WARN
+    private const val ERROR = android.util.Log.ERROR
+    private const val ASSERT = android.util.Log.ASSERT
 
     // Stores the beginning of the LogNode topology.
     var logNode: LogNode? = null
@@ -48,7 +48,7 @@ object Log {
      * @param tr If an exception was thrown, this can be sent along for the logging facilities
      * to extract and print useful information.
      */
-    fun println(priority: Int, tag: String, msg: String?, tr: Throwable? = null) {
+    private fun println(priority: Int, tag: String, msg: String?, tr: Throwable? = null) {
 
         logNode?.println(priority, tag, msg, tr)
 
