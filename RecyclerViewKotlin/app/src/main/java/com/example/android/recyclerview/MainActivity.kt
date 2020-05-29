@@ -27,6 +27,7 @@ import com.example.android.common.logger.Log
 import com.example.android.common.logger.LogFragment
 import com.example.android.common.logger.LogWrapper
 import com.example.android.common.logger.MessageOnlyLogFilter
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * A simple launcher activity containing a summary sample description, sample log and a custom
@@ -60,7 +61,7 @@ class MainActivity : SampleActivityBase() {
 
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         menu.findItem(R.id.menu_toggle_log).run {
-            isVisible = findViewById<ViewAnimator>(R.id.sample_output) is ViewAnimator
+            isVisible = sample_output is ViewAnimator
             setTitle(if (logShown) R.string.sample_hide_log else R.string.sample_show_log)
         }
 
@@ -70,9 +71,7 @@ class MainActivity : SampleActivityBase() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.menu_toggle_log -> {
             logShown = !logShown
-            val output = findViewById<ViewAnimator>(R.id.sample_output) as ViewAnimator
-
-            output.displayedChild = if (logShown) 1 else 0
+            (sample_output as ViewAnimator).displayedChild = if (logShown) 1 else 0
 
             invalidateOptionsMenu()
             true
@@ -95,8 +94,7 @@ class MainActivity : SampleActivityBase() {
         logWrapper.next = msgFilter
 
         // On screen logging via a fragment with a TextView.
-        val logFragment = supportFragmentManager.findFragmentById(R.id.log_fragment) as LogFragment
-        msgFilter.next = logFragment.logView
+        msgFilter.next = (log_fragment as LogFragment).logView
 
         Log.i(TAG, "Ready")
     }

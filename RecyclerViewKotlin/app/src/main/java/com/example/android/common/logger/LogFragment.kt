@@ -19,8 +19,8 @@ package com.example.android.common.logger
 import android.content.Context
 import android.graphics.Typeface
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.widget.TextViewCompat
+import androidx.fragment.app.Fragment
+import androidx.core.widget.TextViewCompat
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity

@@ -17,14 +17,14 @@
 package com.example.android.recyclerview
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
+import kotlinx.android.synthetic.main.recycler_view_frag.*
 
 /**
  * Demonstrates the use of [RecyclerView] with a [LinearLayoutManager] and a
@@ -33,9 +33,8 @@ import android.widget.RadioButton
 class RecyclerViewFragment : Fragment() {
 
     private lateinit var currentLayoutManagerType: LayoutManagerType
-    private lateinit var recyclerView: RecyclerView
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var dataset: Array<String>
+    private lateinit var dataSet: Array<String>
 
     enum class LayoutManagerType { GRID_LAYOUT_MANAGER, LINEAR_LAYOUT_MANAGER }
 
@@ -50,14 +49,16 @@ class RecyclerViewFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.recycler_view_frag,
-                container, false).apply { tag = TAG}
+        return inflater.inflate(R.layout.recycler_view_frag,
+                container, false).apply { tag = TAG }
+    }
 
-        recyclerView = rootView.findViewById(R.id.recyclerView)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         // LinearLayoutManager is used here, this will layout the elements in a similar fashion
         // to the way ListView would layout elements. The RecyclerView.LayoutManager defines how
         // elements are laid out.
+
         layoutManager = LinearLayoutManager(activity)
 
         currentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER
@@ -70,17 +71,17 @@ class RecyclerViewFragment : Fragment() {
         setRecyclerViewLayoutManager(currentLayoutManagerType)
 
         // Set CustomAdapter as the adapter for RecyclerView.
-        recyclerView.adapter = CustomAdapter(dataset)
+        recyclerView.adapter = CustomAdapter(dataSet)
 
-        rootView.findViewById<RadioButton>(R.id.linear_layout_rb).setOnClickListener{
+        linear_layout_rb.setOnClickListener{
             setRecyclerViewLayoutManager(LayoutManagerType.LINEAR_LAYOUT_MANAGER)
         }
 
-        rootView.findViewById<RadioButton>(R.id.grid_layout_rb).setOnClickListener{
+        grid_layout_rb.setOnClickListener{
             setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER)
         }
 
-        return rootView
+        super.onViewCreated(view, savedInstanceState)
     }
 
     /**
@@ -127,7 +128,7 @@ class RecyclerViewFragment : Fragment() {
      * from a local content provider or remote server.
      */
     private fun initDataset() {
-        dataset = Array(DATASET_COUNT, {i -> "This is element # $i"})
+        dataSet = Array(DATASET_COUNT, { i -> "This is element # $i"})
     }
 
     companion object {
