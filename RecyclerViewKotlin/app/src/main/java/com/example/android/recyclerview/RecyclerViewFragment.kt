@@ -43,7 +43,7 @@ class RecyclerViewFragment : Fragment() {
 
         // Initialize dataset, this data would usually come from a local content provider or
         // remote server.
-        initDataset()
+        initDataSet()
     }
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -127,14 +127,14 @@ class RecyclerViewFragment : Fragment() {
      * Generates Strings for RecyclerView's adapter. This data would usually come
      * from a local content provider or remote server.
      */
-    private fun initDataset() {
+    private fun initDataSet() {
         dataSet = Array(DATA_SET_COUNT) { i -> "This is element # $i"}
     }
 
     companion object {
         private const val TAG = "RecyclerViewFragment"
         private const val KEY_LAYOUT_MANAGER = "layoutManager"
-        private const val SPAN_COUNT = 2
+        private const val SPAN_COUNT = 5
         private const val DATA_SET_COUNT = 60
     }
 }
