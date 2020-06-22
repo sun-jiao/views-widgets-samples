@@ -31,30 +31,16 @@ import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import kotlinx.android.synthetic.main.activity_mutable_collection.*
 
 /**
  * Shows how to use notifyDataSetChanged with [ViewPager2]
  */
 abstract class MutableCollectionBaseActivity : FragmentActivity() {
-    private lateinit var buttonAddAfter: Button
-    private lateinit var buttonAddBefore: Button
-    private lateinit var buttonGoTo: Button
-    private lateinit var buttonRemove: Button
-    private lateinit var itemSpinner: Spinner
-    private lateinit var checkboxDiffUtil: CheckBox
-    private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mutable_collection)
-
-        buttonAddAfter = findViewById(R.id.buttonAddAfter)
-        buttonAddBefore = findViewById(R.id.buttonAddBefore)
-        buttonGoTo = findViewById(R.id.buttonGoTo)
-        buttonRemove = findViewById(R.id.buttonRemove)
-        itemSpinner = findViewById(R.id.itemSpinner)
-        checkboxDiffUtil = findViewById(R.id.useDiffUtil)
-        viewPager = findViewById(R.id.viewPager)
 
         viewPager.adapter = createViewPagerAdapter()
 
@@ -77,7 +63,7 @@ abstract class MutableCollectionBaseActivity : FragmentActivity() {
         }
 
         fun changeDataSet(performChanges: () -> Unit) {
-            if (checkboxDiffUtil.isChecked) {
+            if (useDiffUtil.isChecked) {
                 /** using [DiffUtil] */
                 val idsOld = items.createIdSnapshot()
                 performChanges()
